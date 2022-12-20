@@ -1,0 +1,6 @@
+ const [image, setImage] = useState("");
+  const { mutate, data } = useImage();
+  useEffect(() => {
+    setImage(data?.data.imageUrl);
+  }, data);
+ <ImageUpload mutate={mutate} />
