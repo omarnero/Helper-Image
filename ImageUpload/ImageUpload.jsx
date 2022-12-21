@@ -5,6 +5,22 @@ const ImageUpload = (props) => {
   const [previewUrl, setPreviewUrl] = useState();
   const [isValid, setIsValid] = useState(false);
   const filePickedRef = useRef();
+  const addImage = async (data) => {
+    try {
+      const res = await axios.post(
+        "https://dev-api.basekwt.com/uploads/image",
+        data,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
+      console.log(res);
+    } catch (e) {
+      console.log(e);
+    }
+  };
   useEffect(() => {
     if (!file) {
       return;
@@ -35,7 +51,7 @@ const ImageUpload = (props) => {
     console.log(PickedFile);
     const data = new FormData();
     data.append("image", PickedFile);
-    props.mutate(data);
+    addImage(data);
   };
   return (
     <div className="form-control">
